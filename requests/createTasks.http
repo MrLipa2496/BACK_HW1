@@ -1,0 +1,11 @@
+GET http://localhost:5000/tasks HTTP/1.1
+
+###
+POST http://localhost:5000/tasks HTTP/1.1
+Content-Type: application/json
+
+{
+    "body": "Нове завдання",
+    "deadline": "2024-10-01",
+    "isDone": false
+}

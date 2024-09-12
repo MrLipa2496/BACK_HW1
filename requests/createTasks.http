@@ -70,4 +70,7 @@ Content-Type: application/json
     "isDone": true
 }
 
+### pagination Tasks
+
+GET http://localhost:5001/tasks?page=2&results=5 HTTP/1.1
 

@@ -26,11 +26,89 @@ const tasks = [
     deadline: '2024-09-07',
     isDone: false,
   },
+  {
+    id: uuidv4(),
+    body: 'Прочитати книгу',
+    deadline: '2024-10-01',
+    isDone: false,
+  },
+  {
+    id: uuidv4(),
+    body: 'Запланувати відпустку',
+    deadline: '2024-12-15',
+    isDone: false,
+  },
+  {
+    id: uuidv4(),
+    body: 'Навчитися новій технології',
+    deadline: '2024-11-30',
+    isDone: false,
+  },
+  {
+    id: uuidv4(),
+    body: 'Підготуватися до презентації',
+    deadline: '2024-09-20',
+    isDone: true,
+  },
+  {
+    id: uuidv4(),
+    body: 'Зробити ремонт у квартирі',
+    deadline: '2024-10-20',
+    isDone: false,
+  },
+  {
+    id: uuidv4(),
+    body: 'Організувати зустріч з друзями',
+    deadline: '2024-09-18',
+    isDone: true,
+  },
+  {
+    id: uuidv4(),
+    body: 'Завершити курс програмування',
+    deadline: '2024-12-01',
+    isDone: false,
+  },
+  {
+    id: uuidv4(),
+    body: 'Підготувати резюме',
+    deadline: '2024-10-15',
+    isDone: false,
+  },
+  {
+    id: uuidv4(),
+    body: 'Оновити сайт компанії',
+    deadline: '2024-11-05',
+    isDone: false,
+  },
+  {
+    id: uuidv4(),
+    body: 'Вивчити основи машинного навчання',
+    deadline: '2024-11-10',
+    isDone: false,
+  },
+  {
+    id: uuidv4(),
+    body: 'Відвідати виставку мистецтв',
+    deadline: '2024-09-25',
+    isDone: false,
+  },
 ];
 
 // Отримання всіх завдань
 const getTasks = (req, res) => {
-  res.status(200).send(tasks);
+  const { page, resultsPerPage } = req.pagination;
+
+  const startIndex = (page - 1) * resultsPerPage;
+  const endIndex = startIndex + resultsPerPage;
+
+  const paginatedTasks = tasks.slice(startIndex, endIndex);
+
+  res.status(200).send({
+    page,
+    resultsPerPage,
+    totalTasks: tasks.length,
+    tasks: paginatedTasks,
+  });
 };
 
 // Отримання одного завдання

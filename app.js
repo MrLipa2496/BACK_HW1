@@ -1,5 +1,5 @@
 const express = require('express');
-const { validate, errorHandlers } = require('./middleware');
+const { validate, errorHandlers, paginateTasks } = require('./middleware');
 
 const {
   getTasks,
@@ -13,7 +13,7 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/tasks', getTasks);
+app.get('/tasks', paginateTasks, getTasks);
 app.get('/tasks/:id', getTaskById);
 
 app.post('/tasks', validate.validateTask, createTask);

@@ -1,4 +1,6 @@
 const express = require('express');
+const { validate, errorHandlers } = require('./middleware');
+
 const {
   getTasks,
   getTaskById,
@@ -13,8 +15,12 @@ app.use(express.json());
 
 app.get('/tasks', getTasks);
 app.get('/tasks/:id', getTaskById);
-app.post('/tasks', createTask);
-app.put('/tasks/:id', updateTask);
+
+app.post('/tasks', validate.validateTask, createTask);
+app.put('/tasks/:id', validate.validateTask, updateTask);
+
 app.delete('/tasks/:id', deleteTask);
+
+app.use(errorHandlers.validationHandler, errorHandlers.errorHandler);
 
 module.exports = app;
